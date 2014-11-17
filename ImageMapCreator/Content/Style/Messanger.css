@@ -1,0 +1,57 @@
+#messanger {
+	margin: 0px;
+    margin-top: 1px;
+	margin-bottom: 1px;
+	/*
+	position: fixed;
+	bottom: 0px;
+	*/
+	width: 99%;
+	border: dashed 3px gray;
+	border-radius: 5px;
+	
+	height: 100px;
+	/*max-height: 100%;*/
+
+	text-align: left;
+	padding-left: 5px;
+
+	overflow-y: scroll;
+
+	background-color: lightgray;
+
+	/* transition effect */
+	/* For Safari 3.1 to 6.0 */
+	-webkit-transition: all .5s ease;
+	-moz-transition: all .5s ease;
+	transition: all .5s ease;
+}
+
+#messanger :hover {
+	height: 100%;
+}
+
+#messanger span {
+	border: none;
+	border-radius: 5px;
+	padding: 0px;
+	margin: 0px;
+	padding-left: 3px;
+	padding-right: 3px;
+}
+
+#messanger span time {
+	font-weight: bold;
+}
+
+#messanger span.Warning {
+	background-color: yellow;
+}
+
+#messanger span.Info {
+	background-color: lightblue;
+}
+
+#messanger span.Error {
+	background-color: tomato;
+}

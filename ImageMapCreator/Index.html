@@ -1,0 +1,212 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="Content/Style/Reset.css" rel="stylesheet" />
+    <link href="Content/themes/base/jquery.ui.all.css" rel="stylesheet" />
+    <link href="Content/Style/Main.css" rel="stylesheet" />
+
+    <script src="Scripts/Shivs.js"></script>
+    <script src="Scripts/jquery-1.6.4.min.js"></script>
+    <script src="Scripts/jquery-ui-1.10.4.min.js"></script>
+    <script src="Scripts/knockout-3.1.0.js"></script>
+    <script src="Scripts/fabricjs.js"></script>
+    <script src="Scripts/fabricjs-custom-objects.js"></script>
+    <script src="Scripts/FileSaver.js"></script>
+    <script src="Scripts/ImageReader.js"></script>
+    <script src="Scripts/PublishSubscribe.js"></script>
+    <script src="Scripts/keyboard.js"></script>
+    <script src="Scripts/jstorage.js"></script>
+    <script src="Scripts/jStorage-extension.js"></script>
+
+    <title>Coordinates Extractor Tool</title>
+</head>
+<body>
+    <div id="tabs">
+        <ul>
+            <li><a href="#fragment-1">Extract Coordinates</a></li>
+            <li><a href="#fragment-2">Manual</a></li>
+            <li><a href="#fragment-3">About</a></li>
+        </ul>
+
+        <div id="fragment-1">
+            <section id="content">
+                <div id="toolbox">
+                    <input type="file" id="files" name="files[]" multiple="multiple" />
+                    <button id="prevImageButton" data-bind="click: loadPrevImage()"> Previous</button>
+                    <button id="nextImageButton" data-bind="click: loadNextImage()"> Next</button>
+                </div>
+
+                <canvas id="Canvas"></canvas>
+
+                <!-- right click menu -->
+                <ul id="menu">
+                    <li>
+                        <a href="#"><span class="ui-icon ui-icon-plus"></span>Add</a>
+                        <ul>
+                            <li>
+                                <a href="#" data-bind="click: function(data, event) { addCanvasObject(CanvasObjects.CustomRectangle, data, event) }">
+                                    <span class="ui-icon ui-icon-stop"></span>Rect
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" data-bind="click: function(data, event) { addCanvasObject(CanvasObjects.CustomCircle, data, event) }">
+                                    <span class="ui-icon ui-icon-radio-off"></span>Circle
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" data-bind="click: function(data, event) { return window.App.UiExtension.Dialogs.ShowNotImplementedDialog(); }">
+                                    <span class="ui-icon ui-icon-star"></span>Polygon
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" data-bind="click: function(data, event) { copySelection(getSelectedObjects(), data, event) }">
+                            <span class="ui-icon ui-icon-copy"></span>Copy
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-bind="click: function(data, event) { pasteSelection(copiedObjects, data, event) }">
+                            <span class="ui-icon ui-icon-clipboard"></span>Paste
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-bind="click: refreshUi">
+                            <span class="ui-icon ui-icon-refresh"></span>Refresh
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-bind="click: function(data, event) { deleteSelection(getSelectedObjects(), data, event) }">
+                            <span class="ui-icon ui-icon-trash"></span>Delete
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-bind="click: selectAll">Select all</a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="ui-icon ui-icon-disk"></span>Save As
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="#">HTML Map</a>
+                                <ul>
+                                    <li>
+                                        <a href="#" data-bind="click: function(data, event) { saveAsImageMap(ImageMapTypes.ShelfShot, data, event) }">
+                                            <span class="ui-icon ui-icon-gripsmall-diagonal-se"></span>ShelfShot
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" data-bind="click: function(data, event) { saveAsImageMap(ImageMapTypes.ImageHighLighter, data, event) }">
+                                            <span class="ui-icon ui-icon-gripsmall-diagonal-se"></span>Image HighLighter
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">Image</a>
+                                <ul>
+                                    <li>
+                                        <a href="#" data-bind="click: function(data, event) { saveAsImage(ImageFormats.PNG, data, event) }">PNG</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" data-bind="click: function(data, event) { saveAsImage(ImageFormats.JPG, data, event) }">JPG</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#" data-bind="click: saveAsJson">JSON</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="ui-icon ui-icon-seek-next"></span>All
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="#" data-bind="click: function(data, event) { copyStorageForAllImages() }">
+                                    <span class="ui-icon ui-icon-copy"></span>Set this MAP
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" data-bind="click: function(data, event) { saveAllAsImageMap(ImageMapTypes.ShelfShot) }">
+                                    <span class="ui-icon ui-icon-seek-next"></span>Save Shelfshot Maps
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" data-bind="click: function(data, event) { saveAllAsImageMap(ImageMapTypes.ImageHighLighter) }">
+                                    <span class="ui-icon ui-icon-seek-next"></span>Save Image Highlighter Maps
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" data-bind="click: function(data, event) { lineTop(getSelectedObjects()) }">
+                                    <span class="ui-icon ui-icon-seek-next"></span>Line Up Selection
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" data-bind="click: function(data, event) { lineLeft(getSelectedObjects()) }">
+                                    <span class="ui-icon ui-icon-seek-next"></span>Line Left Selection
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+        </div>
+
+        <!-- Manual , still to do here -->
+        <div id="fragment-2">
+            <div id="accordion">
+                <h3>Section 1</h3>
+                <section>
+                    Mauris mauris ante, blandit et, ultrices a, suscipit eget.
+                </section>
+                <h3>Section 2</h3>
+                <section>
+                    Sed non urna. Phasellus eu ligula. Vestibulum sit amet purus.
+                </section>
+                <h3>Section 3</h3>
+                <section>
+                    Nam enim risus, molestie et, porta ac, aliquam ac, risus.
+                </section>
+            </div>
+        </div>
+
+        <!-- About -->
+        <div id="fragment-3">
+            <h3>Version 2.0</h3>
+            <section>
+                Release version.
+            </section>
+            <h3>Version 2.1</h3>
+            <section>
+                Fixed bug with circle coordinates.
+            </section>
+            <h3>Version 2.2</h3>
+            <section>
+                <ol>
+                    <li>Сменени са бордерите на обектите, вече нямат opacity, за да се виждат по-добре, вмомента са червени</li>
+                    <li>Менюто вече се крие без значение какво е избрано от него или около него</li>
+                    <li>В подменюто All има нова фукционалност, която позволява, след като сме избрали няколко обекта да ги подравним отляво или отгоре, като за ориентир туула използва съответно обекта най-вляво или респективно обекта най-нагоре.</li>
+                    <li>Добавих нещо като фина настройка за наместването на обект(и) по екрана, т.е. може да наместваме селектираните неща със стрелките от клавиатурата, като се поместват само с по 1px (леко , леко :D)</li>
+                    <li>Махнах опцията за ротиране на обектите, защото за нашите потребности няма смисъл.</li>
+                </ol>
+            </section>
+        </div>
+
+    </div>
+
+    <!-- UI messages -->
+    <div style="display:none;">
+        <div title="Warning!" id="warning-select-obj-first">
+            <p style="text-align: left">Please select object(s) first!</p>
+        </div>
+        <div title="Error!" id="error-not-implemented">
+            <p style="text-align: left">Not implemented</p>
+        </div>
+    </div>
+
+    <script src="Scripts/App.js"></script>
+</body>
+</html>

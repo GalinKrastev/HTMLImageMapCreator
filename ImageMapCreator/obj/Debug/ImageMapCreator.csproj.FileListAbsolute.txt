@@ -1,0 +1,10 @@
+C:\Users\Galin\documents\visual studio 2013\Projects\SoftwareUniversity\CSharp Preparation for Exam\ImageMapCreator\ImageMapCreator\bin\ImageMapCreator.dll.config
+C:\Users\Galin\documents\visual studio 2013\Projects\SoftwareUniversity\CSharp Preparation for Exam\ImageMapCreator\ImageMapCreator\bin\ImageMapCreator.dll
+C:\Users\Galin\documents\visual studio 2013\Projects\SoftwareUniversity\CSharp Preparation for Exam\ImageMapCreator\ImageMapCreator\bin\ImageMapCreator.pdb
+C:\Users\Galin\documents\visual studio 2013\Projects\SoftwareUniversity\CSharp Preparation for Exam\ImageMapCreator\ImageMapCreator\bin\FunScript.TypeScript.Binding.jstorage.dll
+C:\Users\Galin\documents\visual studio 2013\Projects\SoftwareUniversity\CSharp Preparation for Exam\ImageMapCreator\ImageMapCreator\bin\FunScript.TypeScript.Binding.lib.dll
+C:\Users\Galin\documents\visual studio 2013\Projects\SoftwareUniversity\CSharp Preparation for Exam\ImageMapCreator\ImageMapCreator\bin\FSharp.Core.dll
+C:\Users\Galin\documents\visual studio 2013\Projects\SoftwareUniversity\CSharp Preparation for Exam\ImageMapCreator\ImageMapCreator\bin\FSharp.Core.xml
+C:\Users\Galin\documents\visual studio 2013\Projects\SoftwareUniversity\CSharp Preparation for Exam\ImageMapCreator\ImageMapCreator\obj\Debug\ImageMapCreator.csprojResolveAssemblyReference.cache
+C:\Users\Galin\documents\visual studio 2013\Projects\SoftwareUniversity\CSharp Preparation for Exam\ImageMapCreator\ImageMapCreator\obj\Debug\ImageMapCreator.dll
+C:\Users\Galin\documents\visual studio 2013\Projects\SoftwareUniversity\CSharp Preparation for Exam\ImageMapCreator\ImageMapCreator\obj\Debug\ImageMapCreator.pdb

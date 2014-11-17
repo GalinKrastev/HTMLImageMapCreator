@@ -1,0 +1,51 @@
+﻿#Canvas {
+    background-color: lightgray;
+    background-repeat: no-repeat;
+    /*display: none;*/
+}
+
+body {
+    /*overflow: hidden;*/
+    font-family: "Trebuchet MS", "Helvetica", "Arial", "Verdana", "sans-serif";
+    font-size: 75%;
+    padding: 1px;
+}
+
+/*section {
+	border: solid 1px black;
+}*/
+
+section#content div {
+    float: left;
+}
+
+/*clear fix for all browsers*/
+/* For modern browsers */
+section#content:before,
+section#content:after {
+    content: "";
+    display: table;
+}
+
+section#content:after {
+    clear: both;
+}
+/* For IE 6/7 (trigger hasLayout) */
+section#content {
+    zoom: 1;
+}
+
+#toolbox {
+    /*border: solid 1px black;*/
+    width: 99%;
+}
+
+.ui-menu {
+    width: 150px !important;
+    position: absolute;
+    display: none;
+}
+
+.ui-dialog-buttonset {
+    text-align: right !important;
+}
